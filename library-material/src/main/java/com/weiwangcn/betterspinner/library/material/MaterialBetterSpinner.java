@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -104,5 +105,17 @@ public class MaterialBetterSpinner extends MaterialAutoCompleteTextView implemen
 
     public int getPosition() {
         return mPosition;
+    }
+
+    public void setPosition(int pos){
+        mPosition = pos;
+        Object obj = this.getAdapter().getItem(pos);
+        if (obj == null) {
+            Log.w("MATERIALBETTERSPINNER", "selected item is null");
+            mPosition =  ListView.INVALID_POSITION;
+            return;
+        }else{
+            setText(obj.toString());
+        }
     }
 }
